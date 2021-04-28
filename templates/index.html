@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block title%} Todo-List {% endblock %} {% block
+body %}
+<main>
+    <div class="container ">
+        <h1>Task List</h1>
+
+        <div>
+        <form action="/" method="POST">
+            <input type="text" name="input-task" autocomplete="off" />
+            <input type="submit"  class="btn btn-info"/>
+        </form>
+        </div>
+        
+        {% if todo_list %} 
+        {% for task in todo_list %}
+        <h2>{{task.task_name}}</h2>
+        <div>
+            <span>Task completed:{{task.task_completd}}</span>
+        </br>
+            <span>Date:{{task.task_date}}</span>
+        </div>
+        <div>
+            <a class="btn btn-danger" href="{{url_for('delete_task', id=task.id)}}">Delete</a>
+            <a class="btn btn-primary" href="{{url_for('edit_task', id=task.id)}}">Edit</a>
+        </div>
+        {% endfor %} 
+        {% else %} 
+        <h1>No Task Present</h1>
+        {% endif%} 
+    </div>
+</main>
+
+{% endblock%}
